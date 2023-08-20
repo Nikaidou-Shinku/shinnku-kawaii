@@ -1,53 +1,11 @@
 import { For, createMemo } from "solid-js";
 import { createVirtualizer } from "@tanstack/solid-virtual";
-import { faFile, faFolder } from "@fortawesome/free-regular-svg-icons";
 import { GameItem } from "~/data/interface";
-import { Icon } from "~/components";
-
-interface ListItemProps {
-  game: GameItem;
-  intoFolder: (folder: string) => void;
-}
-
-// TODO: context menu & download
-const ListItem = (props: ListItemProps) => {
-  const onClick = () => {
-    if (props.game.type === "folder") {
-      props.intoFolder(props.game.value);
-    }
-  };
-
-  const date = createMemo(() => {
-    const rawDate = props.game.date;
-
-    if (rawDate === "-") {
-      return "-";
-    }
-
-    return new Date(rawDate).toLocaleString();
-  });
-
-  return (
-    <div
-      class="py-3 px-2 border-b-2 hover:bg-gray-100 space-y-2 cursor-pointer"
-      onClick={onClick}
-    >
-      <div class="flex items-center space-x-2">
-        <Icon name={props.game.type === "file" ? faFile : faFolder} />
-        <span class="overflow-hidden text-ellipsis whitespace-nowrap">
-          {props.game.name}
-        </span>
-      </div>
-      <div class="flex justify-between">
-        <div>Size: {props.game.size}</div>
-        <div>Date: {date()}</div>
-      </div>
-    </div>
-  );
-};
+import ListItem from "./ListItem";
 
 interface ListProps {
   items: GameItem[];
+  position: string[];
   intoFolder: (folder: string) => void;
 }
 
@@ -79,6 +37,7 @@ export default (props: ListProps) => {
               }}
             >
               <ListItem
+                parent={props.position}
                 game={props.items[item.index]}
                 intoFolder={props.intoFolder}
               />

@@ -89,6 +89,7 @@ export default (props: ListLoaderProps) => {
         </form>
         <List
           items={list()}
+          position={props.position}
           intoFolder={props.intoFolder}
         />
       </Match>

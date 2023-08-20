@@ -15,6 +15,7 @@ export default (props: GameListProps) => (
       fallback={(
         <List
           items={rootList}
+          position={[]}
           intoFolder={props.intoFolder}
         />
       )}
