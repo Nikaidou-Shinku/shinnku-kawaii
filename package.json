@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
-    "@fortawesome/free-regular-svg-icons": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@kobalte/core": "^0.10.0",
     "@tanstack/solid-query": "^4.33.0",
     "@tanstack/solid-virtual": "3.0.0-beta.6",

@@ -1,6 +1,6 @@
 import { Show, createMemo } from "solid-js";
 import { ContextMenu } from "@kobalte/core";
-import { faFile, faFolder } from "@fortawesome/free-regular-svg-icons";
+import { faFile, faFolder } from "@fortawesome/free-solid-svg-icons";
 import { GameItem } from "~/data/interface";
 import { Icon } from "~/components";
 

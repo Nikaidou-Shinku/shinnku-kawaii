@@ -1,8 +1,10 @@
 import { Match, Switch, createEffect, createSignal } from "solid-js";
 import { createQuery } from "@tanstack/solid-query";
 import Fuse from "fuse.js";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { GameItem } from "~/data/interface";
 import { shuffleArray } from "~/utils";
+import { Icon } from "~/components";
 import List from "./List";
 
 const fetchGameList = async (account: string, position: string[]) => {
@@ -71,7 +73,14 @@ export default (props: ListLoaderProps) => {
 
   return (
     <Switch>
-      <Match when={query.isLoading}>Loading...</Match>
+      <Match when={query.isLoading}>
+        <div class="bg-white flex-1 flex items-center justify-center text-2xl">
+          <div class="animate-spin">
+            <Icon name={faSpinner} />
+          </div>
+          <div class="pl-1">Loading...</div>
+        </div>
+      </Match>
       <Match when={query.isError}>Error: {`${query.error}`}</Match>
       <Match when={query.isSuccess}>
         <form
