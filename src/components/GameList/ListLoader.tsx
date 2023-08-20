@@ -2,6 +2,7 @@ import { Match, Switch, createEffect, createSignal } from "solid-js";
 import { createQuery } from "@tanstack/solid-query";
 import Fuse from "fuse.js";
 import { GameItem } from "~/data/interface";
+import { shuffleArray } from "~/utils";
 import List from "./List";
 
 const fetchGameList = async (account: string, position: string[]) => {
@@ -46,26 +47,25 @@ export default (props: ListLoaderProps) => {
     const key = searchStr().trim();
 
     if (key === "") {
-      setList(query.data!);
-    } else {
-      const tFuse = fuse();
-
-      if (typeof tFuse === "undefined") {
-        throw "Fuse is undefined!";
-      }
-
-      const res = tFuse.search(key);
-
-      console.log(key, res);
-
-      setList(res.map((item) => item.item));
+      setList(shuffleArray([...query.data!]));
+      return;
     }
+
+    const tFuse = fuse();
+
+    if (typeof tFuse === "undefined") {
+      throw "Fuse is undefined!";
+    }
+
+    const res = tFuse.search(key);
+
+    setList(res.map((item) => item.item));
   };
 
   createEffect(() => {
     if (query.isSuccess) {
       setFuse(new Fuse(query.data, { keys: ["name"], includeScore: true }));
-      setList(query.data);
+      setList(shuffleArray([...query.data]));
     }
   });
 
