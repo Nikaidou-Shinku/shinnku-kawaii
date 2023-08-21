@@ -10,17 +10,17 @@ interface GameListProps {
 }
 
 export default (props: GameListProps) => (
-  <div class="flex-1 flex flex-col overflow-auto">
+  <div class="flex flex-1 flex-col overflow-auto">
     <Show
       when={props.position.length > 0}
-      fallback={(
+      fallback={
         <List
           account={props.account}
           items={rootList}
           position={[]}
           intoFolder={props.intoFolder}
         />
-      )}
+      }
     >
       <ListLoader {...props} />
     </Show>

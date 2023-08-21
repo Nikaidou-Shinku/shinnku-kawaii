@@ -13,25 +13,24 @@ interface ListProps {
 export default (props: ListProps) => {
   let listRef: HTMLDivElement | undefined;
 
-  const virtualizer = createMemo(() => createVirtualizer({
-    count: props.items.length,
-    getScrollElement: () => listRef,
-    estimateSize: () => 82,
-  }));
+  const virtualizer = createMemo(() =>
+    createVirtualizer({
+      count: props.items.length,
+      getScrollElement: () => listRef,
+      estimateSize: () => 82,
+    }),
+  );
 
   return (
-    <div
-      class="bg-white p-4 overflow-auto flex-1"
-      ref={listRef}
-    >
+    <div class="flex-1 overflow-auto bg-white p-4" ref={listRef}>
       <div
-        class="w-full relative"
+        class="relative w-full"
         style={{ height: `${virtualizer().getTotalSize()}px` }}
       >
         <For each={virtualizer().getVirtualItems()}>
           {(item) => (
             <div
-              class="absolute top-0 left-0 w-full"
+              class="absolute left-0 top-0 w-full"
               style={{
                 height: `${item.size}px`,
                 transform: `translateY(${item.start}px)`,

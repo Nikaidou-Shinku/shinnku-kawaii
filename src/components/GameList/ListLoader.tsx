@@ -1,7 +1,10 @@
 import { Match, Switch, createEffect, createSignal } from "solid-js";
 import { createQuery } from "@tanstack/solid-query";
 import Fuse from "fuse.js";
-import { faSpinner, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSpinner,
+  faTriangleExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 import { GameItem } from "~/data/interface";
 import { showToast, shuffleArray } from "~/utils";
 import { Icon } from "~/components";
@@ -68,7 +71,7 @@ export default (props: ListLoaderProps) => {
 
   createEffect(() => {
     if (query.isSuccess) {
-      setFuse(new Fuse(query.data, { keys: ["name"], includeScore: true }));
+      setFuse(new Fuse(query.data, { keys: ["name"] }));
       setList(shuffleArray([...query.data]));
     }
   });
@@ -76,7 +79,7 @@ export default (props: ListLoaderProps) => {
   return (
     <Switch>
       <Match when={query.isLoading}>
-        <div class="bg-white flex-1 flex items-center justify-center text-2xl">
+        <div class="flex flex-1 items-center justify-center bg-white text-2xl">
           <div class="animate-spin">
             <Icon name={faSpinner} />
           </div>
@@ -84,7 +87,7 @@ export default (props: ListLoaderProps) => {
         </div>
       </Match>
       <Match when={query.isError}>
-        <div class="bg-white flex-1 flex flex-col items-center justify-center text-2xl">
+        <div class="flex flex-1 flex-col items-center justify-center bg-white text-2xl">
           <Icon name={faTriangleExclamation} />
           <div class="pt-1">Error: {`${query.error}`}</div>
         </div>
@@ -98,7 +101,7 @@ export default (props: ListLoaderProps) => {
           }}
         >
           <input
-            class="w-full py-2 px-4"
+            class="w-full px-4 py-2"
             placeholder="Search..."
             onChange={(e) => setSearchStr(e.currentTarget.value)}
           />

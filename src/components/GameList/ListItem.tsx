@@ -52,7 +52,7 @@ export default (props: ListItemProps) => {
     <ContextMenu.Root>
       <ContextMenu.Trigger>
         <div
-          class="py-3 px-2 border-b-2 hover:bg-gray-100 space-y-2 cursor-pointer"
+          class="cursor-pointer space-y-2 border-b-2 px-2 py-3 hover:bg-gray-100"
           onClick={onClick}
         >
           <div class="flex items-center space-x-2">
@@ -69,26 +69,26 @@ export default (props: ListItemProps) => {
       </ContextMenu.Trigger>
 
       <ContextMenu.Portal>
-        <ContextMenu.Content class="bg-white min-w-[200px] p-2 rounded-md border shadow outline-0">
+        <ContextMenu.Content class="min-w-[200px] rounded-md border bg-white p-2 shadow outline-0">
           <Show
             when={props.game.type === "file"}
-            fallback={(
+            fallback={
               <ContextMenu.Item
-                class="p-2 hover:bg-blue-600 hover:text-white rounded select-none outline-0"
+                class="select-none rounded p-2 outline-0 hover:bg-blue-600 hover:text-white"
                 onSelect={onClick}
               >
                 Open
               </ContextMenu.Item>
-            )}
+            }
           >
             <ContextMenu.Item
-              class="p-2 hover:bg-blue-600 hover:text-white rounded select-none outline-0"
+              class="select-none rounded p-2 outline-0 hover:bg-blue-600 hover:text-white"
               onSelect={onClick}
             >
               Download
             </ContextMenu.Item>
             <ContextMenu.Item
-              class="p-2 hover:bg-blue-600 hover:text-white rounded select-none outline-0"
+              class="select-none rounded p-2 outline-0 hover:bg-blue-600 hover:text-white"
               onSelect={copyLink}
             >
               Copy link
