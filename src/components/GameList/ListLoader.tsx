@@ -1,9 +1,9 @@
 import { Match, Switch, createEffect, createSignal } from "solid-js";
 import { createQuery } from "@tanstack/solid-query";
 import Fuse from "fuse.js";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { GameItem } from "~/data/interface";
-import { shuffleArray } from "~/utils";
+import { showToast, shuffleArray } from "~/utils";
 import { Icon } from "~/components";
 import List from "./List";
 
@@ -57,7 +57,8 @@ export default (props: ListLoaderProps) => {
     const tFuse = fuse();
 
     if (typeof tFuse === "undefined") {
-      throw "Fuse is undefined!";
+      showToast("Error occurred", "Fuse is undefined!");
+      return;
     }
 
     const res = tFuse.search(key);
@@ -82,7 +83,12 @@ export default (props: ListLoaderProps) => {
           <div class="pl-1">Loading...</div>
         </div>
       </Match>
-      <Match when={query.isError}>Error: {`${query.error}`}</Match>
+      <Match when={query.isError}>
+        <div class="bg-white flex-1 flex flex-col items-center justify-center text-2xl">
+          <Icon name={faTriangleExclamation} />
+          <div class="pt-1">Error: {`${query.error}`}</div>
+        </div>
+      </Match>
       <Match when={query.isSuccess}>
         <form
           class="border-b-2"
