@@ -40,3 +40,5 @@ export const rootList = gameCategories.map((c) => ({
   date: "-",
   size: "-",
 }));
+
+export const onedriveAccounts = ["mk", "02", "03", "04"];

@@ -4,6 +4,7 @@ import { GameItem } from "~/data/interface";
 import ListItem from "./ListItem";
 
 interface ListProps {
+  account: string;
   items: GameItem[];
   position: string[];
   intoFolder: (folder: string) => void;
@@ -37,6 +38,7 @@ export default (props: ListProps) => {
               }}
             >
               <ListItem
+                account={props.account}
                 parent={props.position}
                 game={props.items[item.index]}
                 intoFolder={props.intoFolder}

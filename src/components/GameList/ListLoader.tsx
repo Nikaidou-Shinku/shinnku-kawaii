@@ -30,14 +30,15 @@ const fetchGameList = async (account: string, position: string[]) => {
 };
 
 interface ListLoaderProps {
+  account: string;
   position: string[];
   intoFolder: (folder: string) => void;
 }
 
 export default (props: ListLoaderProps) => {
   const query = createQuery(
-    () => props.position,
-    () => fetchGameList("04", props.position), // TODO: load balance
+    () => [props.account, ...props.position],
+    () => fetchGameList(props.account, props.position),
   );
 
   const [searchStr, setSearchStr] = createSignal("");
@@ -97,6 +98,7 @@ export default (props: ListLoaderProps) => {
           />
         </form>
         <List
+          account={props.account}
           items={list()}
           position={props.position}
           intoFolder={props.intoFolder}

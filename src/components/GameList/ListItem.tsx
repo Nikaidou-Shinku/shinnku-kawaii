@@ -2,10 +2,11 @@ import { Show, createMemo } from "solid-js";
 import { ContextMenu } from "@kobalte/core";
 import { faFile, faFolder } from "@fortawesome/free-solid-svg-icons";
 import { GameItem } from "~/data/interface";
-import { showToast } from "~/utils/toast";
+import { showToast } from "~/utils";
 import { Icon } from "~/components";
 
 interface ListItemProps {
+  account: string;
   parent: string[];
   game: GameItem;
   intoFolder: (folder: string) => void;
@@ -14,7 +15,7 @@ interface ListItemProps {
 export default (props: ListItemProps) => {
   const getUrl = () => {
     const target = [...props.parent, props.game.value].join("/");
-    return `https://shinnku.com/api/download/04/${target}`; // TODO: load balance
+    return `https://shinnku.com/api/download/${props.account}/${target}`;
   };
 
   const onClick = () => {

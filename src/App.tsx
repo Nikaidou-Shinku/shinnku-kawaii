@@ -1,12 +1,15 @@
 import { createSignal } from "solid-js";
 import { Portal } from "solid-js/web";
 import { Toast } from "@kobalte/core";
+import { getAccount } from "~/utils";
 import { Breadcrumbs, GameList } from "~/components";
 
 export default () => {
   const [position, setPosition] = createSignal<string[]>([]);
 
   const intoFolder = (folder: string) => setPosition((prev) => [...prev, folder]);
+
+  const account = getAccount();
 
   return (
     <div class="w-screen h-[100dvh] bg-pink-50">
@@ -16,6 +19,7 @@ export default () => {
           setPosition={setPosition}
         />
         <GameList
+          account={account}
           position={position()}
           intoFolder={intoFolder}
         />
