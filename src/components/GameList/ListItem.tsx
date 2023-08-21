@@ -2,6 +2,7 @@ import { Show, createMemo } from "solid-js";
 import { ContextMenu } from "@kobalte/core";
 import { faFile, faFolder } from "@fortawesome/free-solid-svg-icons";
 import { GameItem } from "~/data/interface";
+import { showToast } from "~/utils/toast";
 import { Icon } from "~/components";
 
 interface ListItemProps {
@@ -13,7 +14,7 @@ interface ListItemProps {
 export default (props: ListItemProps) => {
   const getUrl = () => {
     const target = [...props.parent, props.game.value].join("/");
-    return `/api/download/04/${target}`; // TODO: load balance
+    return `https://shinnku.com/api/download/04/${target}`; // TODO: load balance
   };
 
   const onClick = () => {
@@ -22,6 +23,17 @@ export default (props: ListItemProps) => {
     } else {
       const url = getUrl();
       window.open(url);
+    }
+  };
+
+  const copyLink = async () => {
+    const url = getUrl();
+
+    try {
+      await window.navigator.clipboard.writeText(url);
+      showToast("Successfully copied!", url);
+    } catch (err: any) {
+      showToast("Error occurred", `${err}`);
     }
   };
 
@@ -50,7 +62,7 @@ export default (props: ListItemProps) => {
           </div>
           <div class="flex justify-between">
             <div>Size: {props.game.size}</div>
-            <div>Date: {date()}</div>
+            <div class="hidden sm:block">Date: {date()}</div>
           </div>
         </div>
       </ContextMenu.Trigger>
@@ -76,10 +88,7 @@ export default (props: ListItemProps) => {
             </ContextMenu.Item>
             <ContextMenu.Item
               class="p-2 hover:bg-blue-600 hover:text-white rounded select-none outline-0"
-              onSelect={() => {
-                const url = getUrl();
-                navigator.clipboard.writeText(url);
-              }}
+              onSelect={copyLink}
             >
               Copy link
             </ContextMenu.Item>
