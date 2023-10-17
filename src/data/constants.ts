@@ -4,32 +4,32 @@ const gameCategories = [
     value: "win",
   },
   {
-    name: "Android",
-    value: "Android直装",
+    name: "RPG",
+    value: "rpg",
   },
   {
     name: "Kirikiri 2",
     value: "krkr",
   },
   {
+    name: "Android",
+    value: "apk",
+  },
+  {
     name: "ONScripter",
     value: "ons",
   },
   {
-    name: "RPG",
-    value: "rpg",
-  },
-  {
-    name: "Untranslated",
-    value: "生肉",
+    name: "Artroid",
+    value: "artroid",
   },
   {
     name: "Simulators",
-    value: "模拟器",
+    value: "simulate",
   },
   {
-    name: "Artroid",
-    value: "Artroid",
+    name: "Tools",
+    value: "tools",
   },
 ];
 

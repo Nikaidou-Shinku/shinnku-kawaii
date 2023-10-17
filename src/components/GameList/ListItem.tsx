@@ -6,7 +6,6 @@ import { showToast } from "~/utils";
 import { Icon } from "~/components";
 
 interface ListItemProps {
-  account: string;
   parent: string[];
   game: GameItem;
   intoFolder: (folder: string) => void;
@@ -15,7 +14,7 @@ interface ListItemProps {
 export default (props: ListItemProps) => {
   const getUrl = () => {
     const target = [...props.parent, props.game.value].join("/");
-    return `https://shinnku.com/api/download/${props.account}/${target}`;
+    return `https://shinnku.com/api/download/legacy/${target}`;
   };
 
   const onClick = () => {

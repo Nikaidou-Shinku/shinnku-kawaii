@@ -10,11 +10,9 @@ import { showToast, shuffleArray } from "~/utils";
 import { Icon } from "~/components";
 import List from "./List";
 
-const fetchGameList = async (account: string, position: string[]) => {
+const fetchGameList = async (position: string[]) => {
   const target = position.join("/");
-  const resp = await fetch(
-    `https://shinnku.com/api/download/${account}/${target}`,
-  );
+  const resp = await fetch(`https://shinnku.com/api/download/legacy/${target}`);
 
   interface GameInfo {
     "@type": "file" | "folder";
@@ -35,16 +33,15 @@ const fetchGameList = async (account: string, position: string[]) => {
 };
 
 interface ListLoaderProps {
-  account: string;
   position: string[];
   intoFolder: (folder: string) => void;
 }
 
 export default (props: ListLoaderProps) => {
-  const query = createQuery(
-    () => [props.account, ...props.position],
-    () => fetchGameList(props.account, props.position),
-  );
+  const query = createQuery(() => ({
+    queryKey: props.position,
+    queryFn: (params) => fetchGameList(params.queryKey),
+  }));
 
   const [searchStr, setSearchStr] = createSignal("");
 
@@ -109,7 +106,6 @@ export default (props: ListLoaderProps) => {
           />
         </form>
         <List
-          account={props.account}
           items={list()}
           position={props.position}
           intoFolder={props.intoFolder}

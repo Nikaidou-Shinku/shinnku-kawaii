@@ -1,5 +1,4 @@
 export { showToast } from "./toast";
-export { getAccount } from "./loadBalancing";
 
 export const shuffleArray = <T>(arr: T[]): T[] => {
   let currentIndex = arr.length,

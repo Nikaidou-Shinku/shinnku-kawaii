@@ -4,7 +4,6 @@ import ListLoader from "./ListLoader";
 import List from "./List";
 
 interface GameListProps {
-  account: string;
   position: string[];
   intoFolder: (folder: string) => void;
 }
@@ -14,12 +13,7 @@ export default (props: GameListProps) => (
     <Show
       when={props.position.length > 0}
       fallback={
-        <List
-          account={props.account}
-          items={rootList}
-          position={[]}
-          intoFolder={props.intoFolder}
-        />
+        <List items={rootList} position={[]} intoFolder={props.intoFolder} />
       }
     >
       <ListLoader {...props} />
