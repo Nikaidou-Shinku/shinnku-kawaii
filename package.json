@@ -15,7 +15,9 @@
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@kobalte/core": "^0.11.0",
+    "@tanstack/query-sync-storage-persister": "^5.0.0",
     "@tanstack/solid-query": "^5.0.0",
+    "@tanstack/solid-query-persist-client": "^5.0.0",
     "@tanstack/solid-virtual": "3.0.0-beta.6",
     "fuse.js": "^6.6.2",
     "solid-js": "^1.8.1"

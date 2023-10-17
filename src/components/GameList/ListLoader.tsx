@@ -43,13 +43,11 @@ export default (props: ListLoaderProps) => {
     queryFn: (params) => fetchGameList(params.queryKey),
   }));
 
-  const [searchStr, setSearchStr] = createSignal("");
-
   const [fuse, setFuse] = createSignal<Fuse<GameItem>>();
   const [list, setList] = createSignal<GameItem[]>([]);
 
-  const search = () => {
-    const key = searchStr().trim();
+  const search = (keyword: string) => {
+    const key = keyword.trim();
 
     if (key === "") {
       setList(shuffleArray([...query.data!]));
@@ -92,19 +90,11 @@ export default (props: ListLoaderProps) => {
         </div>
       </Match>
       <Match when={query.isSuccess}>
-        <form
-          class="border-b-2"
-          onSubmit={(e) => {
-            e.preventDefault();
-            search();
-          }}
-        >
-          <input
-            class="w-full px-4 py-2"
-            placeholder="Search..."
-            onChange={(e) => setSearchStr(e.currentTarget.value)}
-          />
-        </form>
+        <input
+          class="w-full border-b-2 px-4 py-2"
+          placeholder="Search..."
+          onKeyDown={(e) => search(e.currentTarget.value)}
+        />
         <List
           items={list()}
           position={props.position}

@@ -14,9 +14,15 @@ dependencies:
   '@kobalte/core':
     specifier: ^0.11.0
     version: 0.11.0(solid-js@1.8.1)
+  '@tanstack/query-sync-storage-persister':
+    specifier: ^5.0.0
+    version: 5.0.0
   '@tanstack/solid-query':
     specifier: ^5.0.0
     version: 5.0.0(solid-js@1.8.1)
+  '@tanstack/solid-query-persist-client':
+    specifier: ^5.0.0
+    version: 5.0.0(@tanstack/solid-query@5.0.0)(solid-js@1.8.1)
   '@tanstack/solid-virtual':
     specifier: 3.0.0-beta.6
     version: 3.0.0-beta.6
@@ -872,6 +878,30 @@ packages:
 
   /@tanstack/query-core@5.0.0:
     resolution: {integrity: sha512-Y1BpiA6BblJd/UlVqxEVeAG7IACn568YJuTTItAiecBI7En+33g780kg+/8lhgl+BzcUPN7o+NjBrSRGJoemyQ==}
+    dev: false
+
+  /@tanstack/query-persist-client-core@5.0.0:
+    resolution: {integrity: sha512-WXzvS37iriXMb4o1ES+SJvMou0Jw+Iko7f6/VmeFgSatKQfeidfIAUBYoBqRQ/sDwVRzLVWuf9e57SQPtqankQ==}
+    dependencies:
+      '@tanstack/query-core': 5.0.0
+    dev: false
+
+  /@tanstack/query-sync-storage-persister@5.0.0:
+    resolution: {integrity: sha512-5BgMqggDSJiOAPFuy6ZYL3Oursls1ZIecv0uY0xL6IQQk5PGdbcexd1n6j3sH0+nWtvhEiBCYsV5QnXMZ0QZbQ==}
+    dependencies:
+      '@tanstack/query-core': 5.0.0
+      '@tanstack/query-persist-client-core': 5.0.0
+    dev: false
+
+  /@tanstack/solid-query-persist-client@5.0.0(@tanstack/solid-query@5.0.0)(solid-js@1.8.1):
+    resolution: {integrity: sha512-naGSu6FEmQ4zn6yevi4kICpR4AgdgsWaVROg/Guup+TEMzFrpT90fGv/z7oWGDhYC9rigSeV2ZQDoL9PqTka6A==}
+    peerDependencies:
+      '@tanstack/solid-query': 5.0.0
+      solid-js: ^1.6.0
+    dependencies:
+      '@tanstack/query-persist-client-core': 5.0.0
+      '@tanstack/solid-query': 5.0.0(solid-js@1.8.1)
+      solid-js: 1.8.1
     dev: false
 
   /@tanstack/solid-query@5.0.0(solid-js@1.8.1):
