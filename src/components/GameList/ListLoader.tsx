@@ -93,7 +93,7 @@ export default (props: ListLoaderProps) => {
         <input
           class="w-full border-b-2 px-4 py-2"
           placeholder="Search..."
-          onKeyDown={(e) => search(e.currentTarget.value)}
+          onInput={(e) => search(e.currentTarget.value)}
         />
         <List
           items={list()}
