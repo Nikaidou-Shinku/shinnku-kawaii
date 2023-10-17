@@ -12,7 +12,9 @@ import List from "./List";
 
 const fetchGameList = async (account: string, position: string[]) => {
   const target = position.join("/");
-  const resp = await fetch(`/api/download/${account}/${target}`);
+  const resp = await fetch(
+    `https://shinnku.com/api/download/${account}/${target}`,
+  );
 
   interface GameInfo {
     "@type": "file" | "folder";
