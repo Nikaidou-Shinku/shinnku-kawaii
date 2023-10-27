@@ -14,7 +14,7 @@ interface ListItemProps {
 export default (props: ListItemProps) => {
   const getUrl = () => {
     const target = [...props.parent, props.game.value].join("/");
-    return `https://shinnku.com/api/download/legacy/${target}`;
+    return `https://www.shinnku.com/api/download/legacy/${target}`;
   };
 
   const onClick = () => {

@@ -12,7 +12,9 @@ import List from "./List";
 
 const fetchGameList = async (position: string[]) => {
   const target = position.join("/");
-  const resp = await fetch(`https://shinnku.com/api/download/legacy/${target}`);
+  const resp = await fetch(
+    `https://www.shinnku.com/api/download/legacy/${target}`,
+  );
 
   interface GameInfo {
     "@type": "file" | "folder";
